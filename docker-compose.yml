@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    image: dunglas/frankenphp
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/var/www/html
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - APP_KEY=base64:YOUT_APP_KEY_HERE
+    working_dir: /var/www/html
+    command: ["php", "artisan", "octane:start", "--server=frankenphp", "--host=0.0.0.0", "--port=8000"]
+
+  composer:
+    image: composer:latest
+    profiles:
+      - setup
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: ["composer", "install"]
+
+  swagger:
+    image: openapitools/openapi-generator-cli
+    profiles:
+      - setup
+    volumes:
+      - ./swagger:/swagger
+    command: ["generate", "-i", "/swagger/openapi.yaml", "-g", "php-laravel"]
+
+volumes:
+  laravel_cache:
