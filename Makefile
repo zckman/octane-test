@@ -20,25 +20,25 @@ init:
 
 # Docker Compose commands
 up:
-	docker-compose up -d
+	docker compose up -d
 
 down:
-	docker-compose down
+	docker compose down
 
 logs:
-	docker-compose logs -f
+	docker compose logs -f
 
 generate:
-	docker-compose run --rm --user $(UID):$(GID) swagger generate -i $(SWAGGER_SPEC) -g php-laravel
+	docker compose run --rm --user $(UID):$(GID) swagger generate -i $(SWAGGER_SPEC) -g php-laravel
 
 install:
-	docker-compose run --rm --user $(UID):$(GID) composer install
+	docker compose run --rm --user $(UID):$(GID) composer install
 
 migrate:
-	docker-compose run --rm --user $(UID):$(GID) app php artisan migrate
+	docker compose run --rm --user $(UID):$(GID) app php artisan migrate
 
 serve:
-	docker-compose up app
+	docker compose up app
 
 tinker:
-	docker-compose run --rm --user $(UID):$(GID) app php artisan tinker
+	docker compose run --rm --user $(UID):$(GID) app php artisan tinker
