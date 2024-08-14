@@ -4,7 +4,7 @@ services:
   app:
     image: dunglas/frankenphp
     ports:
-      - 8000:8000
+      - "8000:8000"
     volumes:
       - ./:/var/www/html
     environment:
