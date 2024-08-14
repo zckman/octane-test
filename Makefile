@@ -16,6 +16,7 @@ init:
 	# Remove the temporary directory
 	rm -rf temp_laravel
 	# Install dependencies
+	docker compose run --rm --user $(UID):$(GID) composer require laravel/octane
 	$(MAKE) install
 
 # Docker Compose commands
